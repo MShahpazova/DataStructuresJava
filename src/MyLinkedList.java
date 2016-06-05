@@ -151,5 +151,22 @@ public class MyLinkedList<T> {
         nodes.add(newNode);
        return newNode;
     }
-//    TODO implement method addAfter
+
+    public MyLinkedListNode<T> addAfter(MyLinkedListNode<T> node, T value){
+        if (!nodes.contains(node)){
+            throw new IllegalArgumentException("No such node.");
+        }
+        MyLinkedListNode<T> newNode = new MyLinkedListNode<T>(value, node, node.getNext());
+
+        node.setNext(newNode);
+        if (newNode.getNext() == null){
+            last = newNode;
+        }
+        else{
+            newNode.getNext().setPrev(newNode);
+        }
+        count++;
+        nodes.add(newNode);
+        return newNode;
+    }
 }
