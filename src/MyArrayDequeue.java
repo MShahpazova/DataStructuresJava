@@ -1,5 +1,6 @@
+import java.util.Iterator;
 
-public class MyArrayDequeue<T>{
+public class MyArrayDequeue<T> implements Iterable<T>{
     private static final int DEFAULT_CAPACITY = 8;
     private int count;
     private int head;
@@ -40,18 +41,25 @@ public class MyArrayDequeue<T>{
         tail = index;
     }
 
-    public boolean contains(T element){
-        int current = head;
-        for (int i = 0; i < count; i++) {
-            if (elements[current].equals(element)){
+    public boolean contains(T element) {
+
+        for (T item : this) {
+            if (item.equals(element)) {
                 return true;
-            }
-            current++;
-            if (current == elements.length){
-                current = 0;
             }
         }
         return false;
+//        int current = head;
+//        for (int i = 0; i < count; i++) {
+//            if (elements[current].equals(element)){
+//                return true;
+//            }
+//            current++;
+//            if (current == elements.length){
+//                current = 0;
+//            }
+//        }
+//        return false;
     }
 
     public T pop(){
@@ -88,5 +96,27 @@ public class MyArrayDequeue<T>{
             }
         }
         elements = temp;
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        Iterator<T> it = new Iterator<T>() {
+            int currentIndex = head;
+            @Override
+            public boolean hasNext() {
+                return currentIndex != tail;
+            }
+
+            @Override
+            public T next() {
+                T value =  (T)elements[currentIndex++];
+                if (currentIndex == elements.length){
+                    currentIndex = 0;
+                }
+                return value;
+            }
+        };
+
+        return it;
     }
 }

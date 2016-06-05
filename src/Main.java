@@ -16,6 +16,14 @@ public class Main {
 //
 //        boolean removed = myLinkedList.remove(node);
 
+        MyHashMap<Character, Integer> map = new MyHashMap<>();
+        for (int i = 'A'; i < 'Z'; i++) {
+            map.put((char)i, i - 'A' + 1);
+        }
 
+        for (MyKeyValuePair<Character, Integer> pair:
+             map) {
+            System.out.println(pair.getKey() + " --> " + pair.getValue());
+        }
     }
 }

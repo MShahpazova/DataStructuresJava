@@ -1,7 +1,8 @@
 import java.util.HashSet;
+import java.util.Iterator;
 
 
-public class MyLinkedList<T> {
+public class MyLinkedList<T> implements Iterable<T> {
     private MyLinkedListNode<T> first;
     private MyLinkedListNode<T> last;
     private HashSet<MyLinkedListNode<T>> nodes = new HashSet<>();
@@ -93,6 +94,7 @@ public class MyLinkedList<T> {
     }
 
     public MyLinkedListNode<T> find(T value) {
+
         MyLinkedListNode current = first;
         while (current != null) {
             if (current.getValue().equals(value)) {
@@ -163,5 +165,32 @@ public class MyLinkedList<T> {
         count++;
         nodes.add(newNode);
         return newNode;
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        Iterator<T> it = new Iterator<T>() {
+            private MyLinkedListNode<T> current = first;
+
+            @Override
+            public boolean hasNext() {
+                return current.getNext() != null;
+            }
+
+            @Override
+            public T next() {
+                T value = current.getNext().getValue();
+                current = current.getNext();
+
+                return value;
+            }
+
+            @Override
+            public void remove() {
+                throw new UnsupportedOperationException();
+            }
+        };
+
+        return it;
     }
 }
