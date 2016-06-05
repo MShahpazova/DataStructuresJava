@@ -1,11 +1,6 @@
-import com.sun.xml.internal.bind.v2.TODO;
-
 import java.util.HashSet;
-import java.util.LinkedList;
 
-/**
- * Created by maria on 04.06.16.
- */
+
 public class MyLinkedList<T> {
     private MyLinkedListNode<T> first;
     private MyLinkedListNode<T> last;
